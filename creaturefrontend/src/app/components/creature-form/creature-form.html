@@ -1,108 +1,171 @@
 <div class="container">
-  <h2>{{ isEditMode ? 'Lény szerkesztése' : 'Új lény létrehozása' }}</h2>
+  <div class="form-wrapper">
+    <h2 class="form-title">{{ isEditMode ? '✨ Mágikus Lény Szerkesztése ✨' : '🌟 Új Mágikus Lény Létrehozása 🌟' }}</h2>
 
-  <form [formGroup]="creatureForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="nev">Név</label>
-      <input type="text" id="nev" formControlName="nev" class="form-control">
-      <div *ngIf="creatureForm.get('nev')?.touched && creatureForm.get('nev')?.invalid" class="error-message">
-        A név megadása kötelező
+    <form [formGroup]="creatureForm" (ngSubmit)="onSubmit()">
+      <div class="form-section" data-section="🏷️ Alapadatok">
+        <div class="form-group">
+          <label for="nev">🦄 Mágikus Név</label>
+          <input type="text" 
+                 id="nev" 
+                 formControlName="nev" 
+                 class="form-control"
+                 placeholder="Add meg a lény varázslatosan titokzatos nevét...">
+          <div *ngIf="creatureForm.get('nev')?.touched && creatureForm.get('nev')?.invalid" class="error-message">
+            ⚠️ A mágikus név megadása kötelező
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tudomanyos_nev">🔬 Tudományos Megnevezés</label>
+          <input type="text" 
+                 id="tudomanyos_nev" 
+                 formControlName="tudomanyos_nev" 
+                 class="form-control"
+                 placeholder="Pl. Draco magicus spectacularis...">
+        </div>
+
+        <div class="form-group">
+          <label for="kategoria_id">📂 Mágikus Kategória</label>
+          <select id="kategoria_id" formControlName="kategoria_id" class="form-control">
+            <option value="">🌟 Válassz mágikus kategóriát...</option>
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nev }}</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="tudomanyos_nev">Tudományos név</label>
-      <input type="text" id="tudomanyos_nev" formControlName="tudomanyos_nev" class="form-control">
-    </div>
+      <div class="form-section" data-section="📜 Leírás & Történet">
+        <div class="form-group">
+          <label for="leiras">📖 Mágikus Leírás</label>
+          <textarea id="leiras" 
+                    formControlName="leiras" 
+                    class="form-control" 
+                    rows="6"
+                    placeholder="Mesélj el mindent erről a fantasztikus lényről... Mi teszi különlegessé? Milyen varázslatok rejlenek benne?"></textarea>
+        </div>
 
-    <div class="form-group">
-      <label for="kategoria_id">Kategória</label>
-      <select id="kategoria_id" formControlName="kategoria_id" class="form-control">
-        <option value="">Válassz kategóriát</option>
-        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nev }}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="leiras">Leírás</label>
-      <textarea id="leiras" formControlName="leiras" class="form-control" rows="5"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="elohely">Élőhely</label>
-      <input type="text" id="elohely" formControlName="elohely" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label for="meret">Méret</label>
-      <select id="meret" formControlName="meret" class="form-control">
-        <option value="">Válassz méretet</option>
-        <option value="apró">Apró</option>
-        <option value="kicsi">Kicsi</option>
-        <option value="közepes">Közepes</option>
-        <option value="nagy">Nagy</option>
-        <option value="hatalmas">Hatalmas</option>
-        <option value="gigantikus">Gigantikus</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="veszelyesseg">Veszélyesség</label>
-      <select id="veszelyesseg" formControlName="veszelyesseg" class="form-control">
-        <option value="">Válassz veszélyességi szintet</option>
-        <option value="ártalmatlan">Ártalmatlan</option>
-        <option value="alacsony">Alacsony</option>
-        <option value="közepes">Közepes</option>
-        <option value="magas">Magas</option>
-        <option value="extrém">Extrém</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="ritkasag">Ritkaság (1-10)</label>
-      <input type="number" id="ritkasag" formControlName="ritkasag" class="form-control" min="1" max="10">
-    </div>
-
-    <div class="form-group">
-      <label for="allapot">Állapot</label>
-      <select id="allapot" formControlName="allapot" class="form-control">
-        <option value="">Válassz állapotot</option>
-        <option value="aktív">Aktív</option>
-        <option value="inaktív">Inaktív</option>
-        <option value="kivizsgálás_alatt">Kivizsgálás alatt</option>
-        <option value="eltűnt">Eltűnt</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="felfedezes_datuma">Felfedezés dátuma</label>
-      <input type="date" id="felfedezes_datuma" formControlName="felfedezes_datuma" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label for="felfedezo">Felfedező</label>
-      <input type="text" id="felfedezo" formControlName="felfedezo" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label for="kep">Kép feltöltése</label>
-      <input type="file" id="kep" (change)="onFileSelected($event)" class="form-control" accept="image/*">
-      <small class="form-text text-muted">Csak képfájlokat lehet feltölteni (JPG, PNG, GIF)</small>
-      
-      <!-- Kép előnézet -->
-      <div *ngIf="previewUrl" class="image-preview mt-2">
-        <img [src]="previewUrl" alt="Előnézet" style="max-width: 200px; max-height: 200px; object-fit: cover;">
-        <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeImage()">Eltávolítás</button>
+        <div class="form-group">
+          <label for="elohely">🏞️ Mágikus Élőhely</label>
+          <input type="text" 
+                 id="elohely" 
+                 formControlName="elohely" 
+                 class="form-control"
+                 placeholder="Pl. Titkos erdő, kristálybarlang, lebegő sziget...">
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+      <div class="form-section" data-section="⚖️ Fizikai Tulajdonságok">
+        <div class="form-group">
+          <label for="meret">📏 Méret Kategória</label>
+          <select id="meret" formControlName="meret" class="form-control">
+            <option value="">🌟 Válassz méretet...</option>
+            <option value="apró">🐁 Apró (tenyérnyi)</option>
+            <option value="kicsi">🐱 Kicsi (háziállat méret)</option>
+            <option value="közepes">🐺 Közepes (ember méret)</option>
+            <option value="nagy">🐻 Nagy (autó méret)</option>
+            <option value="hatalmas">🐘 Hatalmas (ház méret)</option>
+            <option value="gigantikus">🏔️ Gigantikus (hegy méret)</option>
+          </select>
+        </div>
 
-    <div class="form-actions">
-      <button type="submit" [disabled]="creatureForm.invalid || loading" class="btn btn-primary">
-        {{ isEditMode ? 'Mentés' : 'Létrehozás' }}
-      </button>
-      <a routerLink="/creatures" class="btn btn-secondary">Mégse</a>
-    </div>
-  </form>
+        <div class="form-group">
+          <label for="veszelyesseg">⚠️ Veszélyességi Szint</label>
+          <select id="veszelyesseg" formControlName="veszelyesseg" class="form-control">
+            <option value="">🌟 Válassz veszélyességi szintet...</option>
+            <option value="ártalmatlan">😇 Ártalmatlan (barátságos)</option>
+            <option value="alacsony">😊 Alacsony (óvatos)</option>
+            <option value="közepes">😐 Közepes (tiszteletet parancsoló)</option>
+            <option value="magas">😨 Magas (veszélyes)</option>
+            <option value="extrém">💀 Extrém (halálos)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ritkasag">💎 Ritkaság Indexe (1-10)</label>
+          <input type="number" 
+                 id="ritkasag" 
+                 formControlName="ritkasag" 
+                 class="form-control" 
+                 min="1" 
+                 max="10"
+                 placeholder="1 = gyakori, 10 = legendás">
+        </div>
+      </div>
+
+      <div class="form-section" data-section="📊 Státusz & Adatok">
+        <div class="form-group">
+          <label for="allapot">📈 Jelenlegi Állapot</label>
+          <select id="allapot" formControlName="allapot" class="form-control">
+            <option value="">🌟 Válassz állapotot...</option>
+            <option value="aktív">✅ Aktív (észlelések vannak)</option>
+            <option value="inaktív">⏸️ Inaktív (jelenleg nem észlelhető)</option>
+            <option value="kivizsgálás_alatt">🔍 Kivizsgálás alatt</option>
+            <option value="eltűnt">👻 Eltűnt (fellelhetetlen)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="felfedezes_datuma">📅 Felfedezés Napja</label>
+          <input type="date" 
+                 id="felfedezes_datuma" 
+                 formControlName="felfedezes_datuma" 
+                 class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="felfedezo">🧙‍♂️ Felfedező Mágus</label>
+          <input type="text" 
+                 id="felfedezo" 
+                 formControlName="felfedezo" 
+                 class="form-control"
+                 placeholder="Ki fedezte fel ezt a csodálatos lényt?">
+        </div>
+      </div>
+
+      <div class="form-section" data-section="🖼️ Mágikus Kép">
+        <div class="form-group">
+          <label for="kep">📸 Varázslatos Fotó Feltöltése</label>
+          <input type="file" 
+                 id="kep" 
+                 (change)="onFileSelected($event)" 
+                 class="form-control" 
+                 accept="image/*">
+          <small style="color: rgba(255,255,255,0.7); margin-top: 10px; display: block;">
+            🎨 Csak képfájlokat lehet feltölteni (JPG, PNG, GIF) - Maximum 10MB
+          </small>
+          
+          <!-- Kép előnézet -->
+          <div *ngIf="previewUrl" style="margin-top: 25px; text-align: center;">
+            <div style="display: inline-block; position: relative; border-radius: 15px; overflow: hidden; border: 3px solid rgba(78,205,196,0.6); box-shadow: 0 0 30px rgba(78,205,196,0.4);">
+              <img [src]="previewUrl" 
+                   alt="Mágikus előnézet" 
+                   style="max-width: 300px; max-height: 300px; object-fit: cover; display: block;">
+            </div>
+            <button type="button" 
+                    class="btn btn-secondary" 
+                    (click)="removeImage()" 
+                    style="margin-top: 15px; background: linear-gradient(45deg, #ff6b6b, #ff7675);">
+              🗑️ Kép Eltávolítása
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        🚨 {{ error }}
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" 
+                [disabled]="creatureForm.invalid || loading" 
+                class="btn btn-primary">
+          {{ isEditMode ? '💾 Mágikus Mentés' : '✨ Varázslatos Létrehozás' }}
+          {{ loading ? ' 🔄' : '' }}
+        </button>
+        <a routerLink="/creatures" class="btn btn-secondary">
+          🚪 Visszatérés a Kataszterhez
+        </a>
+      </div>
+    </form>
+  </div>
 </div>

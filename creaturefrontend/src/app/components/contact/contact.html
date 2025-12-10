@@ -1,66 +1,89 @@
-<div class="container contact-container">
-  <h2>Kapcsolat</h2>
-  <p>Kérdésed van? Írj nekünk!</p>
-
-  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="nev">Név</label>
-      <input type="text" id="nev" formControlName="nev" class="form-control">
-      <div *ngIf="contactForm.get('nev')?.touched && contactForm.get('nev')?.invalid" class="error-message">
-        A név megadása kötelező
+<div class="contact-container">
+  <div class="contact-form-wrapper">
+    <h2 class="contact-title">✉️ Mágikus Kapcsolatfelvétel ✉️</h2>
+    
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nev" class="form-label">👤 Mágikus Név</label>
+        <input type="text" 
+               id="nev" 
+               formControlName="nev" 
+               class="form-control"
+               placeholder="Add meg a varázsló neved...">
+        <div *ngIf="contactForm.get('nev')?.touched && contactForm.get('nev')?.invalid" class="error-message">
+          ⚠️ A mágikus név megadása kötelező
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" formControlName="email" class="form-control">
-      <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid" class="error-message">
-        Érvényes email cím szükséges
+      <div class="form-group">
+        <label for="email" class="form-label">📧 Kristálygolyó Email</label>
+        <input type="email" 
+               id="email" 
+               formControlName="email" 
+               class="form-control"
+               placeholder="magikus.email@varazslat.hu">
+        <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid" class="error-message">
+          ⚠️ Érvényes mágikus email cím szükséges
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="telefon">Telefon (opcionális)</label>
-      <input type="tel" id="telefon" formControlName="telefon" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label for="targy">Tárgy</label>
-      <input type="text" id="targy" formControlName="targy" class="form-control">
-      <div *ngIf="contactForm.get('targy')?.touched && contactForm.get('targy')?.invalid" class="error-message">
-        A tárgy megadása kötelező
+      <div class="form-group">
+        <label for="telefon" class="form-label">📱 Varázstükör Telefon (opcionális)</label>
+        <input type="tel" 
+               id="telefon" 
+               formControlName="telefon" 
+               class="form-control"
+               placeholder="+36 XX XXX XXXX">
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="tipus">Üzenet típusa</label>
-      <select id="tipus" formControlName="tipus" class="form-control">
-        <option value="általános">Általános kérdés</option>
-        <option value="lény_bejelentés">Lény bejelentés</option>
-        <option value="hiba_jelentés">Hiba jelentés</option>
-        <option value="javaslat">Javaslat</option>
-        <option value="egyéb">Egyéb</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="uzenet">Üzenet</label>
-      <textarea id="uzenet" formControlName="uzenet" class="form-control" rows="5"></textarea>
-      <div *ngIf="contactForm.get('uzenet')?.touched && contactForm.get('uzenet')?.invalid" class="error-message">
-        Az üzenet nem lehet üres
+      <div class="form-group">
+        <label for="targy" class="form-label">📜 Üzenet Tárgya</label>
+        <input type="text" 
+               id="targy" 
+               formControlName="targy" 
+               class="form-control"
+               placeholder="Milyen mágikus dologról szeretnél írni?">
+        <div *ngIf="contactForm.get('targy')?.touched && contactForm.get('targy')?.invalid" class="error-message">
+          ⚠️ A tárgy megadása kötelező
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="successMessage" class="alert alert-success">
-      {{ successMessage }}
-    </div>
+      <div class="form-group">
+        <label for="tipus" class="form-label">🏷️ Varázslat Típusa</label>
+        <select id="tipus" formControlName="tipus" class="form-control">
+          <option value="általános">💬 Általános mágikus kérdés</option>
+          <option value="lény_bejelentés">🦄 Új lény bejelentés</option>
+          <option value="hiba_jelentés">🔧 Varázslat hiba jelentés</option>
+          <option value="javaslat">💡 Mágikus javaslat</option>
+          <option value="egyéb">🌟 Egyéb titokzatos dolog</option>
+        </select>
+      </div>
 
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
+      <div class="form-group">
+        <label for="uzenet" class="form-label">✍️ Mágikus Üzened</label>
+        <textarea id="uzenet" 
+                  formControlName="uzenet" 
+                  class="form-control" 
+                  rows="6"
+                  placeholder="Oszd meg velünk a mágikus gondolataidat... Mi a titkos kérdésed vagy üzeneted?"></textarea>
+        <div *ngIf="contactForm.get('uzenet')?.touched && contactForm.get('uzenet')?.invalid" class="error-message">
+          ⚠️ A mágikus üzenet nem lehet üres
+        </div>
+      </div>
 
-    <button type="submit" [disabled]="contactForm.invalid || loading" class="btn btn-primary">
-      {{ loading ? 'Küldés...' : 'Küldés' }}
-    </button>
-  </form>
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" 
+              [disabled]="contactForm.invalid || loading" 
+              class="submit-btn">
+        {{ loading ? '🔄 Varázslat küldése...' : '🚀 Mágikus Üzenet Küldése' }}
+      </button>
+    </form>
+  </div>
 </div>

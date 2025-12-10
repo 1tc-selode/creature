@@ -1,47 +1,59 @@
 <div class="container" *ngIf="creature">
   <div class="detail-header">
     <h1>{{ creature.nev }}</h1>
-    <span class="scientific-name" *ngIf="creature.tudomanyos_nev">({{ creature.tudomanyos_nev }})</span>
+    <span class="scientific-name" *ngIf="creature.tudomanyos_nev">{{ creature.tudomanyos_nev }}</span>
   </div>
 
   <div class="detail-content">
     <div class="main-image" *ngIf="creature.kep_url">
-      <img [src]="creature.kep_url" [alt]="creature.nev">
+      <img [src]="creature.kep_url" 
+           [alt]="creature.nev" 
+           class="creature-image">
     </div>
 
     <div class="info-panel">
       <div class="info-item">
-        <strong>Kategória:</strong> {{ creature.kategoria?.nev }}
+        <strong>🏷️ Kategória:</strong> {{ creature.kategoria?.nev || 'Titokzatos kategória' }}
       </div>
       <div class="info-item" *ngIf="creature.elohely">
-        <strong>Élőhely:</strong> {{ creature.elohely }}
+        <strong>🏞️ Élőhely:</strong> {{ creature.elohely }}
       </div>
       <div class="info-item" *ngIf="creature.meret">
-        <strong>Méret:</strong> {{ creature.meret }}
+        <strong>📏 Méret:</strong> {{ creature.meret }}
       </div>
       <div class="info-item" *ngIf="creature.veszelyesseg">
-        <strong>Veszélyesség:</strong> {{ creature.veszelyesseg }}
+        <strong>⚠️ Veszélyesség:</strong> {{ creature.veszelyesseg }}
+      </div>
+      <div class="info-item" *ngIf="creature.ritkasag">
+        <strong>💎 Ritkaság:</strong> {{ creature.ritkasag }}/10
+      </div>
+      <div class="info-item" *ngIf="creature.allapot">
+        <strong>📊 Állapot:</strong> {{ creature.allapot }}
+      </div>
+      <div class="info-item" *ngIf="creature.felfedezo">
+        <strong>🧙‍♂️ Felfedező:</strong> {{ creature.felfedezo }}
+      </div>
+      <div class="info-item" *ngIf="creature.felfedezes_datuma">
+        <strong>📅 Felfedezés:</strong> {{ creature.felfedezes_datuma | date:'yyyy-MM-dd' }}
       </div>
       
-      <div class="description">
-        <h3>Leírás</h3>
+      <div class="description" *ngIf="creature.leiras">
         <p>{{ creature.leiras }}</p>
       </div>
 
-      <div class="abilities" *ngIf="creature.kepessegek && creature.kepessegek.length > 0">
-        <h3>Képességek</h3>
-        <ul>
-          <li *ngFor="let ability of creature.kepessegek">
-            <strong>{{ ability.nev }}</strong>: {{ ability.leiras }}
-          </li>
-        </ul>
+      <div class="abilities-section" *ngIf="creature.kepessegek && creature.kepessegek.length > 0">
+        <h3>⚡ Mágikus Képességek</h3>
+        <div class="ability-item" *ngFor="let ability of creature.kepessegek">
+          <div class="ability-name">{{ ability.nev }}</div>
+          <div class="ability-description">{{ ability.leiras || 'Titokzatos képesség...' }}</div>
+        </div>
       </div>
 
-      <div class="actions">
-        <a routerLink="/creatures" class="btn btn-secondary">Vissza</a>
+      <div class="action-buttons">
+        <a routerLink="/creatures" class="action-btn back-btn">🏠 Vissza a Kataszterhez</a>
         <ng-container *ngIf="isLoggedIn">
-          <a [routerLink]="['/creatures', creature.id, 'edit']" class="btn btn-warning">Szerkesztés</a>
-          <a [routerLink]="['/creatures', creature.id, 'gallery']" class="btn btn-info">Galéria</a>
+          <a [routerLink]="['/creatures', creature.id, 'edit']" class="action-btn edit-btn">✏️ Szerkesztés</a>
+          <a [routerLink]="['/creatures', creature.id, 'gallery']" class="action-btn gallery-btn">🖼️ Galéria</a>
         </ng-container>
       </div>
     </div>
