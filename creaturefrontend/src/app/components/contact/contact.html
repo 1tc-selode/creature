@@ -1,0 +1,42 @@
+<div class="container contact-container">
+  <h2>Kapcsolat</h2>
+  <p>Kérdésed van? Írj nekünk!</p>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nev">Név</label>
+      <input type="text" id="nev" formControlName="nev" class="form-control">
+      <div *ngIf="contactForm.get('nev')?.touched && contactForm.get('nev')?.invalid" class="error-message">
+        A név megadása kötelező
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" class="form-control">
+      <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid" class="error-message">
+        Érvényes email cím szükséges
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="uzenet">Üzenet</label>
+      <textarea id="uzenet" formControlName="uzenet" class="form-control" rows="5"></textarea>
+      <div *ngIf="contactForm.get('uzenet')?.touched && contactForm.get('uzenet')?.invalid" class="error-message">
+        Az üzenet nem lehet üres
+      </div>
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <button type="submit" [disabled]="contactForm.invalid || loading" class="btn btn-primary">
+      {{ loading ? 'Küldés...' : 'Küldés' }}
+    </button>
+  </form>
+</div>

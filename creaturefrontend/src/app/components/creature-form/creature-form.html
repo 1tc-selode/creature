@@ -1,0 +1,55 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Lény szerkesztése' : 'Új lény létrehozása' }}</h2>
+
+  <form [formGroup]="creatureForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nev">Név</label>
+      <input type="text" id="nev" formControlName="nev" class="form-control">
+      <div *ngIf="creatureForm.get('nev')?.touched && creatureForm.get('nev')?.invalid" class="error-message">
+        A név megadása kötelező
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tudomanyos_nev">Tudományos név</label>
+      <input type="text" id="tudomanyos_nev" formControlName="tudomanyos_nev" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="kategoria_id">Kategória</label>
+      <select id="kategoria_id" formControlName="kategoria_id" class="form-control">
+        <option value="">Válassz kategóriát</option>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nev }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="leiras">Leírás</label>
+      <textarea id="leiras" formControlName="leiras" class="form-control" rows="5"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="elohely">Élőhely</label>
+      <input type="text" id="elohely" formControlName="elohely" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="meret">Méret</label>
+      <input type="text" id="meret" formControlName="meret" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="veszelyesseg">Veszélyesség</label>
+      <input type="text" id="veszelyesseg" formControlName="veszelyesseg" class="form-control">
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="creatureForm.invalid || loading" class="btn btn-primary">
+        {{ isEditMode ? 'Mentés' : 'Létrehozás' }}
+      </button>
+      <a routerLink="/creatures" class="btn btn-secondary">Mégse</a>
+    </div>
+  </form>
+</div>

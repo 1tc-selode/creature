@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="header">
+    <h1>Lények</h1>
+    <div class="actions">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Keresés..." class="search-input">
+      <a *ngIf="isLoggedIn" routerLink="/creatures/new" class="btn btn-success">Új lény</a>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">Betöltés...</div>
+
+  <div class="creature-grid" *ngIf="!loading">
+    <div *ngFor="let creature of filteredCreatures" class="creature-card">
+      <div class="card-image" *ngIf="creature.kep_url">
+        <img [src]="creature.kep_url" [alt]="creature.nev">
+      </div>
+      <div class="card-content">
+        <h3>{{ creature.nev }}</h3>
+        <p class="category" *ngIf="creature.kategoria">{{ creature.kategoria.nev }}</p>
+        <p class="description">{{ creature.leiras | slice:0:100 }}...</p>
+        <div class="card-actions">
+          <a [routerLink]="['/creatures', creature.id]" class="btn btn-info">Részletek</a>
+          <ng-container *ngIf="isLoggedIn">
+            <a [routerLink]="['/creatures', creature.id, 'edit']" class="btn btn-warning">Szerkesztés</a>
+            <a [routerLink]="['/creatures', creature.id, 'gallery']" class="btn btn-secondary">Galéria</a>
+            <button (click)="deleteCreature(creature.id)" class="btn btn-danger">Törlés</button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="header">
+    <h2>Galéria</h2>
+    <a *ngIf="creatureId" [routerLink]="['/creatures', creatureId]" class="btn btn-secondary">Vissza a lényhez</a>
+  </div>
+
+  <div *ngIf="isLoggedIn" class="upload-section">
+    <h3>Új kép feltöltése</h3>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" class="form-control">
+  </div>
+
+  <div *ngIf="loading" class="loading">Betöltés...</div>
+
+  <div class="gallery-grid" *ngIf="!loading">
+    <div *ngFor="let image of images" class="gallery-item">
+      <img [src]="image.fajl_nev" [alt]="image.cim || 'Galéria kép'" (click)="openLightbox(image)">
+      <button *ngIf="isLoggedIn" (click)="deleteImage(image.id)" class="btn btn-danger btn-sm delete-btn">X</button>
+    </div>
+    <div *ngIf="images.length === 0" class="no-images">
+      Nincsenek képek ebben a galériában.
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" *ngIf="selectedImage" (click)="closeLightbox()">
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <img [src]="selectedImage.fajl_nev" [alt]="selectedImage.cim">
+      <button class="close-btn" (click)="closeLightbox()">Bezárás</button>
+    </div>
+  </div>
+</div>

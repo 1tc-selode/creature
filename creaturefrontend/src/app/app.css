@@ -1,0 +1,50 @@
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 1rem 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #ddd;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: white;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  color: white;
+}

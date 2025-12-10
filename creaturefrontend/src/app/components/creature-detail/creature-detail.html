@@ -1,0 +1,51 @@
+<div class="container" *ngIf="creature">
+  <div class="detail-header">
+    <h1>{{ creature.nev }}</h1>
+    <span class="scientific-name" *ngIf="creature.tudomanyos_nev">({{ creature.tudomanyos_nev }})</span>
+  </div>
+
+  <div class="detail-content">
+    <div class="main-image" *ngIf="creature.kep_url">
+      <img [src]="creature.kep_url" [alt]="creature.nev">
+    </div>
+
+    <div class="info-panel">
+      <div class="info-item">
+        <strong>Kategória:</strong> {{ creature.kategoria?.nev }}
+      </div>
+      <div class="info-item" *ngIf="creature.elohely">
+        <strong>Élőhely:</strong> {{ creature.elohely }}
+      </div>
+      <div class="info-item" *ngIf="creature.meret">
+        <strong>Méret:</strong> {{ creature.meret }}
+      </div>
+      <div class="info-item" *ngIf="creature.veszelyesseg">
+        <strong>Veszélyesség:</strong> {{ creature.veszelyesseg }}
+      </div>
+      
+      <div class="description">
+        <h3>Leírás</h3>
+        <p>{{ creature.leiras }}</p>
+      </div>
+
+      <div class="abilities" *ngIf="creature.kepessegek && creature.kepessegek.length > 0">
+        <h3>Képességek</h3>
+        <ul>
+          <li *ngFor="let ability of creature.kepessegek">
+            <strong>{{ ability.nev }}</strong>: {{ ability.leiras }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <a routerLink="/creatures" class="btn btn-secondary">Vissza</a>
+        <ng-container *ngIf="isLoggedIn">
+          <a [routerLink]="['/creatures', creature.id, 'edit']" class="btn btn-warning">Szerkesztés</a>
+          <a [routerLink]="['/creatures', creature.id, 'gallery']" class="btn btn-info">Galéria</a>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading">Betöltés...</div>
