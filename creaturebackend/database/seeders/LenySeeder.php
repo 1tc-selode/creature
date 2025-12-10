@@ -18,7 +18,7 @@ class LenySeeder extends Seeder
     {
         // Először létrehozunk egy admin felhasználót
         $admin = User::firstOrCreate(
-            ['email' => 'admin@külkat.hu'],
+            ['email' => 'admin@kulkat.hu'],
             [
                 'name' => 'KÜLKAT Admin',
                 'password' => bcrypt('password123')

@@ -19,9 +19,9 @@ export class AuthService {
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
-        if (response.token) {
-          this.setToken(response.token);
-          this.setUser(response.user);
+        if (response.success && response.data?.token) {
+          this.setToken(response.data.token);
+          this.setUser(response.data.user);
         }
       })
     );
@@ -29,9 +29,16 @@ export class AuthService {
 
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}).pipe(
-      tap(() => {
-        this.removeToken();
-        this.removeUser();
+      tap({
+        next: () => {
+          this.removeToken();
+          this.removeUser();
+        },
+        error: () => {
+          // Ha a backend hívás sikertelen, akkor is töröljük lokálisan
+          this.removeToken();
+          this.removeUser();
+        }
       })
     );
   }

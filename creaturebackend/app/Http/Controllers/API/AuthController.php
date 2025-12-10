@@ -21,9 +21,13 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
+        // Debug kiírás
+        \Log::info('Login attempt', ['email' => $request->email, 'password_length' => strlen($request->password)]);
+        
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
+            \Log::error('Login failed', ['email' => $request->email, 'user_exists' => !!$user]);
             throw ValidationException::withMessages([
                 'email' => ['Hibás email cím vagy jelszó.'],
             ]);

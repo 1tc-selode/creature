@@ -51,5 +51,9 @@ export interface Creature {
 export interface ContactMessage {
   nev: string;
   email: string;
+  telefon?: string;
+  targy: string;
   uzenet: string;
+  tipus: string;
+  leny_id?: number;
 }

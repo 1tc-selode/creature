@@ -12,7 +12,11 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  token: string;
-  user: User;
-  message?: string;
+  success: boolean;
+  message: string;
+  data: {
+    token: string;
+    user: User;
+    token_type: string;
+  };
 }

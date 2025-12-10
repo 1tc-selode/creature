@@ -12,12 +12,29 @@ import { CommonModule } from '@angular/common';
 })
 export class App {
   title = 'creaturefrontend';
+  isMobileMenuOpen = false;
 
   constructor(public authService: AuthService, private router: Router) {}
 
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+  }
+
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigate(['/login']);
+    this.closeMobileMenu();
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        // Ha a backend logout sikertelen, akkor is navigáljunk vissza
+        // A token már törölve lett az AuthService-ben
+        this.router.navigate(['/login']);
+      }
     });
   }
 }

@@ -1,29 +1,76 @@
-<div class="container">
-  <div class="header">
-    <h1>Lények</h1>
-    <div class="actions">
-      <input type="text" [(ngModel)]="searchTerm" placeholder="Keresés..." class="search-input">
-      <a *ngIf="isLoggedIn" routerLink="/creatures/new" class="btn btn-success">Új lény</a>
+<div class="creature-list-container">
+  <h1 class="page-title">✨ Mágikus Lények Katasztere ✨</h1>
+  
+  <div class="header-actions">
+    <div class="search-container">
+      <input type="text" 
+             [(ngModel)]="searchTerm" 
+             placeholder="🔍 Keress mágikus lényeket..." 
+             class="search-input">
     </div>
+    <a *ngIf="isLoggedIn" 
+       routerLink="/creatures/new" 
+       class="add-creature-btn">
+      ⭐ Új Mágikus Lény Hozzáadása ⭐
+    </a>
   </div>
 
-  <div *ngIf="loading" class="loading">Betöltés...</div>
+  <div *ngIf="loading" class="loading-container">
+    <div>🔮 Mágikus lények betöltése...</div>
+  </div>
 
-  <div class="creature-grid" *ngIf="!loading">
+  <div *ngIf="!loading && filteredCreatures.length === 0" class="no-creatures">
+    <div>🦄 Még nincsenek mágikus lények a kataszterben!</div>
+  </div>
+
+  <div class="creatures-grid" *ngIf="!loading && filteredCreatures.length > 0">
     <div *ngFor="let creature of filteredCreatures" class="creature-card">
-      <div class="card-image" *ngIf="creature.kep_url">
-        <img [src]="creature.kep_url" [alt]="creature.nev">
+      <div class="creature-image-container" *ngIf="creature.kep_url">
+        <img [src]="creature.kep_url" 
+             [alt]="creature.nev" 
+             class="creature-image">
       </div>
-      <div class="card-content">
-        <h3>{{ creature.nev }}</h3>
-        <p class="category" *ngIf="creature.kategoria">{{ creature.kategoria.nev }}</p>
-        <p class="description">{{ creature.leiras | slice:0:100 }}...</p>
-        <div class="card-actions">
-          <a [routerLink]="['/creatures', creature.id]" class="btn btn-info">Részletek</a>
+      
+      <div class="creature-content">
+        <h3 class="creature-name">🌟 {{ creature.nev }} 🌟</h3>
+        
+        <p class="creature-category" *ngIf="creature.kategoria">
+          📂 {{ creature.kategoria.nev }}
+        </p>
+        
+        <p class="creature-description">
+          {{ creature.leiras && creature.leiras.length > 150 ? (creature.leiras | slice:0:150) + '...' : creature.leiras }}
+        </p>
+        
+        <div class="creature-stats" *ngIf="creature.meret || creature.veszelyesseg || creature.ritkasag">
+          <div class="stat-item" *ngIf="creature.meret">
+            <div class="stat-label">📏 Méret</div>
+            <div class="stat-value">{{ creature.meret }}</div>
+          </div>
+          <div class="stat-item" *ngIf="creature.veszelyesseg">
+            <div class="stat-label">⚠️ Veszélyesség</div>
+            <div class="stat-value">{{ creature.veszelyesseg }}</div>
+          </div>
+          <div class="stat-item" *ngIf="creature.ritkasag">
+            <div class="stat-label">💎 Ritkaság</div>
+            <div class="stat-value">{{ creature.ritkasag }}/10</div>
+          </div>
+        </div>
+        
+        <div class="creature-actions">
+          <a [routerLink]="['/creatures', creature.id]" class="action-btn view-btn">
+            👁️ Részletek
+          </a>
           <ng-container *ngIf="isLoggedIn">
-            <a [routerLink]="['/creatures', creature.id, 'edit']" class="btn btn-warning">Szerkesztés</a>
-            <a [routerLink]="['/creatures', creature.id, 'gallery']" class="btn btn-secondary">Galéria</a>
-            <button (click)="deleteCreature(creature.id)" class="btn btn-danger">Törlés</button>
+            <a [routerLink]="['/creatures', creature.id, 'edit']" class="action-btn edit-btn">
+              ✏️ Szerkesztés
+            </a>
+            <a [routerLink]="['/creatures', creature.id, 'gallery']" class="action-btn view-btn">
+              🖼️ Galéria
+            </a>
+            <button (click)="deleteCreature(creature.id)" class="action-btn delete-btn">
+              🗑️ Törlés
+            </button>
           </ng-container>
         </div>
       </div>

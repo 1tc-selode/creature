@@ -20,6 +20,30 @@
     </div>
 
     <div class="form-group">
+      <label for="telefon">Telefon (opcionális)</label>
+      <input type="tel" id="telefon" formControlName="telefon" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="targy">Tárgy</label>
+      <input type="text" id="targy" formControlName="targy" class="form-control">
+      <div *ngIf="contactForm.get('targy')?.touched && contactForm.get('targy')?.invalid" class="error-message">
+        A tárgy megadása kötelező
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tipus">Üzenet típusa</label>
+      <select id="tipus" formControlName="tipus" class="form-control">
+        <option value="általános">Általános kérdés</option>
+        <option value="lény_bejelentés">Lény bejelentés</option>
+        <option value="hiba_jelentés">Hiba jelentés</option>
+        <option value="javaslat">Javaslat</option>
+        <option value="egyéb">Egyéb</option>
+      </select>
+    </div>
+
+    <div class="form-group">
       <label for="uzenet">Üzenet</label>
       <textarea id="uzenet" formControlName="uzenet" class="form-control" rows="5"></textarea>
       <div *ngIf="contactForm.get('uzenet')?.touched && contactForm.get('uzenet')?.invalid" class="error-message">

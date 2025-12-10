@@ -1,0 +1,554 @@
+/* EXTREME MAGICAL CREATURE LIST */
+
+@keyframes creature-card-entrance {
+  0% { 
+    transform: scale(0.3) rotateY(-180deg) translateY(200px); 
+    opacity: 0;
+    filter: blur(30px);
+  }
+  50% { 
+    transform: scale(1.2) rotateY(-90deg) translateY(-50px); 
+    opacity: 0.7;
+    filter: blur(15px);
+  }
+  100% { 
+    transform: scale(1) rotateY(0deg) translateY(0px); 
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes magical-hover-dance {
+  0%, 100% { 
+    transform: translateY(0px) rotateZ(0deg); 
+    box-shadow: 0 15px 50px rgba(255,107,107,0.3);
+  }
+  25% { 
+    transform: translateY(-8px) rotateZ(2deg); 
+    box-shadow: 0 25px 70px rgba(78,205,196,0.4);
+  }
+  50% { 
+    transform: translateY(-12px) rotateZ(0deg); 
+    box-shadow: 0 35px 90px rgba(255,204,102,0.5);
+  }
+  75% { 
+    transform: translateY(-5px) rotateZ(-2deg); 
+    box-shadow: 0 45px 110px rgba(181,112,255,0.6);
+  }
+}
+
+@keyframes mystical-grid-glow {
+  0%, 100% { 
+    background: linear-gradient(45deg, #0f0f23, #1a1a2e, #16213e);
+    box-shadow: inset 0 0 100px rgba(255,107,107,0.1);
+  }
+  25% { 
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    box-shadow: inset 0 0 120px rgba(78,205,196,0.15);
+  }
+  50% { 
+    background: linear-gradient(225deg, #16213e, #0f3460, #0f0f23);
+    box-shadow: inset 0 0 140px rgba(255,204,102,0.2);
+  }
+  75% { 
+    background: linear-gradient(315deg, #0f3460, #0f0f23, #1a1a2e);
+    box-shadow: inset 0 0 160px rgba(181,112,255,0.25);
+  }
+}
+
+@keyframes cosmic-title-pulse {
+  0%, 100% { 
+    text-shadow: 
+      0 0 20px rgba(255,107,107,0.8),
+      0 0 40px rgba(255,107,107,0.6),
+      0 0 60px rgba(255,107,107,0.4);
+    transform: scale(1);
+  }
+  25% { 
+    text-shadow: 
+      0 0 25px rgba(78,205,196,0.8),
+      0 0 50px rgba(78,205,196,0.6),
+      0 0 75px rgba(78,205,196,0.4);
+    transform: scale(1.02);
+  }
+  50% { 
+    text-shadow: 
+      0 0 30px rgba(255,204,102,0.8),
+      0 0 60px rgba(255,204,102,0.6),
+      0 0 90px rgba(255,204,102,0.4);
+    transform: scale(1.05);
+  }
+  75% { 
+    text-shadow: 
+      0 0 35px rgba(181,112,255,0.8),
+      0 0 70px rgba(181,112,255,0.6),
+      0 0 105px rgba(181,112,255,0.4);
+    transform: scale(1.03);
+  }
+}
+
+@keyframes floating-sparkles {
+  0% { 
+    transform: translate(0, 0) rotate(0deg) scale(0.5);
+    opacity: 0.2;
+  }
+  25% { 
+    transform: translate(50px, -30px) rotate(90deg) scale(1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translate(100px, -60px) rotate(180deg) scale(1.5);
+    opacity: 1;
+  }
+  75% { 
+    transform: translate(150px, -30px) rotate(270deg) scale(1);
+    opacity: 0.4;
+  }
+  100% { 
+    transform: translate(200px, 0) rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes divine-button-magic {
+  0%, 100% { 
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+  }
+  50% { 
+    background: linear-gradient(45deg, #4ecdc4, #96ceb4, #ffeaa7);
+    transform: scale(1.05);
+    box-shadow: 0 15px 45px rgba(78,205,196,0.5);
+  }
+}
+
+.creature-list-container {
+  min-height: 100vh;
+  background: 
+    linear-gradient(45deg, #0f0f23, #1a1a2e, #16213e, #0f3460),
+    radial-gradient(circle at 20% 20%, rgba(255,107,107,0.1) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(78,205,196,0.1) 0%, transparent 60%);
+  background-size: 400% 400%, 100% 100%, 100% 100%;
+  animation: mystical-grid-glow 15s ease-in-out infinite;
+  padding: 30px 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.creature-list-container::before {
+  content: '🔮 ⭐ 🌟 ✨ 💫 🌙 ☄️ 🪐 🔮 ⭐ 🌟 ✨ 💫 🌙 ☄️ 🪐 🔮 ⭐ 🌟 ✨ 💫 🌙 ☄️ 🪐';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+  opacity: 0.08;
+  animation: floating-sparkles 30s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  line-height: 100px;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 3.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cosmic-title-pulse 8s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
+}
+
+.page-title::before {
+  content: '🐉';
+  position: absolute;
+  left: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  animation: magical-hover-dance 6s ease-in-out infinite;
+}
+
+.page-title::after {
+  content: '🦄';
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  animation: magical-hover-dance 6s ease-in-out infinite reverse;
+}
+
+.add-creature-btn {
+  display: inline-block;
+  padding: 18px 40px;
+  margin: 0 auto 40px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+  background-size: 400% 400%;
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: divine-button-magic 6s ease-in-out infinite;
+  box-shadow: 
+    0 15px 40px rgba(255,107,107,0.3),
+    0 0 60px rgba(78,205,196,0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-creature-btn::before {
+  content: '✨';
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  transition: all 0.4s ease;
+  opacity: 0;
+}
+
+.add-creature-btn::after {
+  content: '🚀';
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  transition: all 0.4s ease;
+  opacity: 0;
+}
+
+.add-creature-btn:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 
+    0 25px 60px rgba(255,107,107,0.5),
+    0 0 100px rgba(78,205,196,0.4);
+  animation: divine-button-magic 2s ease-in-out infinite;
+}
+
+.add-creature-btn:hover::before {
+  left: 15px;
+  opacity: 1;
+}
+
+.add-creature-btn:hover::after {
+  right: 15px;
+  opacity: 1;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 25px 18px 60px;
+  border: 3px solid rgba(255,107,107,0.3);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  color: #ffffff;
+  font-size: 1.2rem;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: divine-input-glow 12s ease-in-out infinite;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: rgba(78,205,196,0.8);
+  box-shadow: 
+    0 0 50px rgba(78,205,196,0.5),
+    inset 0 0 30px rgba(78,205,196,0.2);
+  transform: scale(1.02);
+  background: rgba(255,255,255,0.15);
+}
+
+.search-input::placeholder {
+  color: rgba(255,255,255,0.6);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus::placeholder {
+  color: rgba(78,205,196,0.8);
+}
+
+.search-container::before {
+  content: '🔍';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  z-index: 10;
+  animation: cosmic-title-pulse 8s ease-in-out infinite;
+}
+
+.creatures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.creature-card {
+  background: linear-gradient(145deg, 
+    rgba(255,255,255,0.1), 
+    rgba(255,255,255,0.05));
+  backdrop-filter: blur(30px);
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 
+    0 20px 60px rgba(0,0,0,0.3),
+    0 0 80px rgba(255,107,107,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.1);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: creature-card-entrance 1.5s ease-out;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.creature-card:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+.creature-card:nth-child(3n) {
+  animation-delay: 0.4s;
+}
+
+.creature-card::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: 
+    radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 50%),
+    radial-gradient(circle, rgba(78,205,196,0.1) 0%, transparent 50%);
+  animation: floating-sparkles 25s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.creature-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 
+    0 30px 80px rgba(0,0,0,0.4),
+    0 0 120px rgba(255,107,107,0.3),
+    inset 0 2px 0 rgba(255,255,255,0.3);
+  animation: magical-hover-dance 3s ease-in-out infinite;
+  border-color: rgba(78,205,196,0.5);
+}
+
+.creature-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  transition: all 0.4s ease;
+  border: 3px solid rgba(255,107,107,0.3);
+  position: relative;
+}
+
+.creature-card:hover .creature-image {
+  transform: scale(1.05);
+  border-color: rgba(78,205,196,0.7);
+  box-shadow: 0 0 40px rgba(78,205,196,0.4);
+}
+
+.creature-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #96ceb4);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cosmic-title-pulse 10s ease-in-out infinite;
+  text-align: center;
+}
+
+.creature-description {
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: justify;
+  font-size: 1rem;
+}
+
+.creature-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255,107,107,0.1);
+  border-radius: 12px;
+  border: 2px solid rgba(255,107,107,0.3);
+}
+
+.stat-item {
+  text-align: center;
+  color: #ffffff;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ffeaa7, #96ceb4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.creature-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.action-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  overflow: hidden;
+}
+
+.view-btn {
+  background: linear-gradient(45deg, #45b7d1, #96ceb4);
+  color: white;
+}
+
+.edit-btn {
+  background: linear-gradient(45deg, #ffeaa7, #96ceb4);
+  color: #2d3436;
+}
+
+.delete-btn {
+  background: linear-gradient(45deg, #ff6b6b, #ff7675);
+  color: white;
+}
+
+.action-btn:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  animation: divine-button-magic 2s ease-in-out infinite;
+}
+
+.loading-container, .no-creatures {
+  text-align: center;
+  padding: 80px 20px;
+  color: #ffffff;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, rgba(255,107,107,0.1), rgba(78,205,196,0.1));
+  border-radius: 20px;
+  margin: 50px auto;
+  max-width: 600px;
+  backdrop-filter: blur(20px);
+  animation: magical-hover-dance 8s ease-in-out infinite;
+}
+
+.loading-container::before, .no-creatures::before {
+  content: '🔮';
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 20px;
+  animation: cosmic-title-pulse 4s ease-in-out infinite;
+}
+
+/* Responsive Magic */
+@media (max-width: 768px) {
+  .creatures-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .page-title::before,
+  .page-title::after {
+    font-size: 2rem;
+    left: -60px;
+    right: -60px;
+  }
+  
+  .creature-card {
+    padding: 20px;
+  }
+  
+  .add-creature-btn {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .creatures-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .creature-list-container {
+    padding: 20px 15px;
+  }
+  
+  .creature-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .action-btn {
+    width: 100%;
+  }
+}

@@ -35,12 +35,65 @@
 
     <div class="form-group">
       <label for="meret">Méret</label>
-      <input type="text" id="meret" formControlName="meret" class="form-control">
+      <select id="meret" formControlName="meret" class="form-control">
+        <option value="">Válassz méretet</option>
+        <option value="apró">Apró</option>
+        <option value="kicsi">Kicsi</option>
+        <option value="közepes">Közepes</option>
+        <option value="nagy">Nagy</option>
+        <option value="hatalmas">Hatalmas</option>
+        <option value="gigantikus">Gigantikus</option>
+      </select>
     </div>
 
     <div class="form-group">
       <label for="veszelyesseg">Veszélyesség</label>
-      <input type="text" id="veszelyesseg" formControlName="veszelyesseg" class="form-control">
+      <select id="veszelyesseg" formControlName="veszelyesseg" class="form-control">
+        <option value="">Válassz veszélyességi szintet</option>
+        <option value="ártalmatlan">Ártalmatlan</option>
+        <option value="alacsony">Alacsony</option>
+        <option value="közepes">Közepes</option>
+        <option value="magas">Magas</option>
+        <option value="extrém">Extrém</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="ritkasag">Ritkaság (1-10)</label>
+      <input type="number" id="ritkasag" formControlName="ritkasag" class="form-control" min="1" max="10">
+    </div>
+
+    <div class="form-group">
+      <label for="allapot">Állapot</label>
+      <select id="allapot" formControlName="allapot" class="form-control">
+        <option value="">Válassz állapotot</option>
+        <option value="aktív">Aktív</option>
+        <option value="inaktív">Inaktív</option>
+        <option value="kivizsgálás_alatt">Kivizsgálás alatt</option>
+        <option value="eltűnt">Eltűnt</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="felfedezes_datuma">Felfedezés dátuma</label>
+      <input type="date" id="felfedezes_datuma" formControlName="felfedezes_datuma" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="felfedezo">Felfedező</label>
+      <input type="text" id="felfedezo" formControlName="felfedezo" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="kep">Kép feltöltése</label>
+      <input type="file" id="kep" (change)="onFileSelected($event)" class="form-control" accept="image/*">
+      <small class="form-text text-muted">Csak képfájlokat lehet feltölteni (JPG, PNG, GIF)</small>
+      
+      <!-- Kép előnézet -->
+      <div *ngIf="previewUrl" class="image-preview mt-2">
+        <img [src]="previewUrl" alt="Előnézet" style="max-width: 200px; max-height: 200px; object-fit: cover;">
+        <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removeImage()">Eltávolítás</button>
+      </div>
     </div>
 
     <div *ngIf="error" class="alert alert-danger">{{ error }}</div>

@@ -23,7 +23,11 @@ export class Contact {
     this.contactForm = this.fb.group({
       nev: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      uzenet: ['', Validators.required]
+      telefon: [''],
+      targy: ['', Validators.required],
+      uzenet: ['', Validators.required],
+      tipus: ['általános', Validators.required],
+      leny_id: [null]
     });
   }
 

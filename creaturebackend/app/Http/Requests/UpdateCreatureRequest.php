@@ -34,6 +34,7 @@ class UpdateCreatureRequest extends FormRequest
             'allapot' => 'sometimes|required|in:aktív,inaktív,kivizsgálás_alatt,eltűnt',
             'kategoria_id' => 'sometimes|required|exists:kategoriak,id',
             'kep_url' => 'nullable|url|max:500',
+            'kep' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'extra_adatok' => 'nullable|array',
             'kepessegek' => 'nullable|array',
             'kepessegek.*' => 'exists:kepessegek,id',

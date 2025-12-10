@@ -1,28 +1,41 @@
 <div class="login-container">
-  <h2>Bejelentkezés</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" formControlName="email" class="form-control">
-      <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error-message">
-        Érvényes email cím szükséges
-      </div>
-    </div>
+  <div class="login-card">
+    <h2 class="login-title">✨ Belépés a Mágikus Világba ✨</h2>
     
-    <div class="form-group">
-      <label for="password">Jelszó</label>
-      <input type="password" id="password" formControlName="password" class="form-control">
-      <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error-message">
-        Jelszó megadása kötelező
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">📧 Mágikus Email</label>
+        <input type="email" 
+               id="email" 
+               formControlName="email" 
+               class="form-control"
+               placeholder="Add meg a mágikus email címed...">
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error-message">
+          ⚠️ Érvényes mágikus email cím szükséges
+        </div>
       </div>
-    </div>
+      
+      <div class="form-group">
+        <label for="password">🔐 Titkos Jelszó</label>
+        <input type="password" 
+               id="password" 
+               formControlName="password" 
+               class="form-control"
+               placeholder="Add meg a titkos varázsszót...">
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error-message">
+          ⚠️ Titkos jelszó megadása kötelező
+        </div>
+      </div>
 
-    <div *ngIf="error" class="alert alert-danger">
-      {{ error }}
-    </div>
+      <div *ngIf="error" class="error-message">
+        🚨 {{ error }}
+      </div>
 
-    <button type="submit" [disabled]="loginForm.invalid || loading" class="btn btn-primary">
-      {{ loading ? 'Bejelentkezés...' : 'Bejelentkezés' }}
-    </button>
-  </form>
+      <button type="submit" 
+              [disabled]="loginForm.invalid || loading" 
+              class="login-btn">
+        {{ loading ? '🔄 Mágikus belépés...' : '🚀 Belépés a Varázslatos Világba' }}
+      </button>
+    </form>
+  </div>
 </div>

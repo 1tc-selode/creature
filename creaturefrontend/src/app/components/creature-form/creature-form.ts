@@ -20,6 +20,8 @@ export class CreatureForm implements OnInit {
   abilities: Ability[] = [];
   loading: boolean = false;
   error: string = '';
+  selectedFile: File | null = null;
+  previewUrl: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -32,8 +34,12 @@ export class CreatureForm implements OnInit {
       tudomanyos_nev: [''],
       leiras: ['', Validators.required],
       elohely: [''],
-      meret: [''],
-      veszelyesseg: [''],
+      meret: ['közepes', Validators.required],
+      veszelyesseg: ['alacsony', Validators.required],
+      ritkasag: [5, [Validators.required, Validators.min(1), Validators.max(10)]],
+      felfedezes_datuma: [''],
+      felfedezo: [''],
+      allapot: ['aktív', Validators.required],
       kategoria_id: ['', Validators.required],
     });
   }
@@ -69,8 +75,16 @@ export class CreatureForm implements OnInit {
           elohely: creature.elohely,
           meret: creature.meret,
           veszelyesseg: creature.veszelyesseg,
+          ritkasag: creature.ritkasag,
+          felfedezes_datuma: creature.felfedezes_datuma,
+          felfedezo: creature.felfedezo,
+          allapot: creature.allapot,
           kategoria_id: creature.kategoria_id
         });
+        // Ha van kép URL, jelenítjük meg előnézetként
+        if (creature.kep_url) {
+          this.previewUrl = creature.kep_url;
+        }
         this.loading = false;
       },
       error: (err) => {
@@ -80,14 +94,49 @@ export class CreatureForm implements OnInit {
     });
   }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      this.selectedFile = file;
+      
+      // Kép előnézet létrehozása
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else if (file) {
+      this.error = 'Csak képfájlokat lehet feltölteni!';
+      this.selectedFile = null;
+      this.previewUrl = null;
+    }
+  }
+
+  removeImage() {
+    this.selectedFile = null;
+    this.previewUrl = null;
+    // Reset file input
+    const fileInput = document.getElementById('kep') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  }
+
   onSubmit() {
     if (this.creatureForm.invalid) return;
 
     this.loading = true;
     const formData = new FormData();
     Object.keys(this.creatureForm.value).forEach(key => {
-      formData.append(key, this.creatureForm.value[key]);
+      if (this.creatureForm.value[key] !== null && this.creatureForm.value[key] !== '') {
+        formData.append(key, this.creatureForm.value[key]);
+      }
     });
+
+    // Ha van kiválasztott fájl, hozzáadjuk a FormData-hoz
+    if (this.selectedFile) {
+      formData.append('kep', this.selectedFile);
+    }
 
     if (this.isEditMode && this.creatureId) {
       this.creatureService.updateCreature(this.creatureId, formData).subscribe({

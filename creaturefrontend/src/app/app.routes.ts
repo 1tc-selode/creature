@@ -8,13 +8,13 @@ import { Contact } from './components/contact/contact';
 import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/creatures', pathMatch: 'full' },
   { path: 'login', component: Login },
-  { path: 'creatures', component: CreatureList },
+  { path: 'creatures', component: CreatureList, canActivate: [authGuard] },
   { path: 'creatures/new', component: CreatureForm, canActivate: [authGuard] },
-  { path: 'creatures/:id', component: CreatureDetail },
+  { path: 'creatures/:id', component: CreatureDetail, canActivate: [authGuard] },
   { path: 'creatures/:id/edit', component: CreatureForm, canActivate: [authGuard] },
-  { path: 'creatures/:id/gallery', component: Gallery },
+  { path: 'creatures/:id/gallery', component: Gallery, canActivate: [authGuard] },
   { path: 'contact', component: Contact },
   { path: '**', redirectTo: '/login' }
 ];

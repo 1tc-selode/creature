@@ -1,0 +1,357 @@
+/* EXTREME MAGICAL CREATURE DETAIL PAGE */
+
+@keyframes legendary-entrance {
+  0% { 
+    transform: scale(0.1) rotateY(-360deg) translateY(500px); 
+    opacity: 0;
+    filter: blur(50px);
+  }
+  30% { 
+    transform: scale(0.6) rotateY(-180deg) translateY(200px); 
+    opacity: 0.3;
+    filter: blur(30px);
+  }
+  60% { 
+    transform: scale(1.3) rotateY(-90deg) translateY(-50px); 
+    opacity: 0.7;
+    filter: blur(10px);
+  }
+  100% { 
+    transform: scale(1) rotateY(0deg) translateY(0px); 
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes epic-image-glow {
+  0%, 100% { 
+    box-shadow: 
+      0 0 50px rgba(255,107,107,0.6),
+      0 0 100px rgba(255,107,107,0.4),
+      0 0 150px rgba(255,107,107,0.2);
+    border-color: rgba(255,107,107,0.8);
+    transform: scale(1);
+  }
+  25% { 
+    box-shadow: 
+      0 0 60px rgba(78,205,196,0.6),
+      0 0 120px rgba(78,205,196,0.4),
+      0 0 180px rgba(78,205,196,0.2);
+    border-color: rgba(78,205,196,0.8);
+    transform: scale(1.02);
+  }
+  50% { 
+    box-shadow: 
+      0 0 70px rgba(255,204,102,0.6),
+      0 0 140px rgba(255,204,102,0.4),
+      0 0 210px rgba(255,204,102,0.2);
+    border-color: rgba(255,204,102,0.8);
+    transform: scale(1.05);
+  }
+  75% { 
+    box-shadow: 
+      0 0 80px rgba(181,112,255,0.6),
+      0 0 160px rgba(181,112,255,0.4),
+      0 0 240px rgba(181,112,255,0.2);
+    border-color: rgba(181,112,255,0.8);
+    transform: scale(1.03);
+  }
+}
+
+@keyframes cosmic-info-flow {
+  0%, 100% { 
+    background: linear-gradient(45deg, rgba(255,107,107,0.1), rgba(78,205,196,0.1));
+    transform: translateX(0px);
+  }
+  25% { 
+    background: linear-gradient(135deg, rgba(78,205,196,0.1), rgba(255,204,102,0.1));
+    transform: translateX(5px);
+  }
+  50% { 
+    background: linear-gradient(225deg, rgba(255,204,102,0.1), rgba(181,112,255,0.1));
+    transform: translateX(-5px);
+  }
+  75% { 
+    background: linear-gradient(315deg, rgba(181,112,255,0.1), rgba(255,107,107,0.1));
+    transform: translateX(3px);
+  }
+}
+
+@keyframes mystical-stat-pulse {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    color: #ff6b6b;
+    text-shadow: 0 0 20px rgba(255,107,107,0.8);
+  }
+  25% { 
+    transform: scale(1.1) rotate(2deg);
+    color: #4ecdc4;
+    text-shadow: 0 0 25px rgba(78,205,196,0.8);
+  }
+  50% { 
+    transform: scale(1.2) rotate(0deg);
+    color: #ffeaa7;
+    text-shadow: 0 0 30px rgba(255,234,167,0.8);
+  }
+  75% { 
+    transform: scale(1.1) rotate(-2deg);
+    color: #b570ff;
+    text-shadow: 0 0 35px rgba(181,112,255,0.8);
+  }
+}
+
+@keyframes divine-button-hover {
+  0%, 100% { 
+    transform: scale(1) translateY(0px); 
+    box-shadow: 0 15px 40px rgba(255,107,107,0.4);
+  }
+  50% { 
+    transform: scale(1.1) translateY(-8px); 
+    box-shadow: 0 25px 60px rgba(78,205,196,0.6);
+  }
+}
+
+@keyframes magical-background-shift {
+  0%, 100% { 
+    background: 
+      linear-gradient(45deg, #0f0f23, #1a1a2e, #16213e, #0f3460),
+      radial-gradient(circle at 20% 20%, rgba(255,107,107,0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(78,205,196,0.1) 0%, transparent 50%);
+  }
+  50% { 
+    background: 
+      linear-gradient(225deg, #1a1a2e, #16213e, #0f3460, #0f0f23),
+      radial-gradient(circle at 80% 20%, rgba(255,204,102,0.1) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(181,112,255,0.1) 0%, transparent 50%);
+  }
+}
+
+.container {
+  min-height: 100vh;
+  background: 
+    linear-gradient(45deg, #0f0f23, #1a1a2e, #16213e, #0f3460),
+    radial-gradient(circle at 20% 20%, rgba(255,107,107,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(78,205,196,0.1) 0%, transparent 50%);
+  background-size: 400% 400%, 100% 100%, 100% 100%;
+  animation: magical-background-shift 20s ease-in-out infinite;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '🌌 ✨ 🔮 ⭐ 🌟 💫 🪐 ☄️ 🌙 🌠 🌌 ✨ 🔮 ⭐ 🌟 💫 🪐 ☄️ 🌙 🌠';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 35px;
+  opacity: 0.05;
+  animation: floating-sparkles 40s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  line-height: 150px;
+}
+
+.detail-header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: legendary-entrance 2.5s ease-out;
+  position: relative;
+  z-index: 10;
+}
+
+.detail-header h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cosmic-title-pulse 10s ease-in-out infinite;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.detail-header h1::before {
+  content: '🐲';
+  position: absolute;
+  left: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3.5rem;
+  animation: mystical-stat-pulse 8s ease-in-out infinite;
+}
+
+.detail-header h1::after {
+  content: '🦄';
+  position: absolute;
+  right: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3.5rem;
+  animation: mystical-stat-pulse 8s ease-in-out infinite reverse;
+}
+
+.scientific-name {
+  font-style: italic;
+  color: #4ecdc4;
+  font-size: 1.5rem;
+  text-shadow: 0 0 20px rgba(78,205,196,0.8);
+  animation: cosmic-info-flow 12s ease-in-out infinite;
+  padding: 15px 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(78,205,196,0.3);
+  display: inline-block;
+}
+
+.detail-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  overflow: hidden;
+  position: relative;
+}
+
+.main-image {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.main-image img {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.info-panel {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.info-item {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.info-item strong {
+  color: #2c3e50;
+  display: inline-block;
+  min-width: 120px;
+}
+
+.description {
+  margin: 25px 0;
+}
+
+.description h3 {
+  color: #2c3e50;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.description p {
+  line-height: 1.6;
+  color: #495057;
+}
+
+.abilities {
+  margin: 25px 0;
+}
+
+.abilities h3 {
+  color: #2c3e50;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.abilities ul {
+  list-style: none;
+  padding: 0;
+}
+
+.abilities li {
+  background: #e9ecef;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border-left: 4px solid #007bff;
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.btn-primary { background-color: #007bff; color: white; }
+.btn-secondary { background-color: #6c757d; color: white; }
+.btn-warning { background-color: #ffc107; color: black; }
+.btn-info { background-color: #17a2b8; color: white; }
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin: 50px 0;
+}
+
+/* Reszponzív design */
+@media (max-width: 768px) {
+  .detail-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .main-image img {
+    max-height: 250px;
+  }
+  
+  .info-panel {
+    padding: 15px;
+  }
+  
+  .actions {
+    justify-content: center;
+  }
+}
+
+/* Nagy képernyőkön a kép még kisebb legyen */
+@media (min-width: 1200px) {
+  .main-image img {
+    max-height: 350px;
+  }
+}

@@ -68,9 +68,28 @@ class CreatureController extends Controller
      */
     public function store(StoreCreatureRequest $request): JsonResponse
     {
-        $leny = new Leny($request->validated());
+        \Log::info('Creature creation attempt', [
+            'user_id' => auth()->id(),
+            'request_data' => $request->all(),
+            'has_file' => $request->hasFile('kep')
+        ]);
+
+        $data = $request->validated();
+        
+        // Kép feltöltés kezelése
+        if ($request->hasFile('kep')) {
+            $file = $request->file('kep');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('creatures', $filename, 'public');
+            $data['kep_url'] = asset('storage/' . $path);
+            \Log::info('File uploaded', ['path' => $path, 'url' => $data['kep_url']]);
+        }
+        
+        $leny = new Leny($data);
         $leny->user_id = auth()->id();
         $leny->save();
+
+        \Log::info('Creature created successfully', ['id' => $leny->id]);
 
         // Képességek hozzárendelése
         if ($request->filled('kepessegek')) {
@@ -130,7 +149,17 @@ class CreatureController extends Controller
             ], 403);
         }
 
-        $leny->update($request->validated());
+        $data = $request->validated();
+        
+        // Kép feltöltés kezelése
+        if ($request->hasFile('kep')) {
+            $file = $request->file('kep');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('creatures', $filename, 'public');
+            $data['kep_url'] = asset('storage/' . $path);
+        }
+
+        $leny->update($data);
 
         // Képességek frissítése
         if ($request->filled('kepessegek')) {

@@ -19,7 +19,7 @@ POST /login
 **Request Body:**
 ```json
 {
-    "email": "admin@külkat.hu",
+    "email": "admin@kulkat.hu",
     "password": "password123"
 }
 ```
@@ -33,7 +33,7 @@ POST /login
         "user": {
             "id": 1,
             "name": "KÜLKAT Admin",
-            "email": "admin@külkat.hu"
+            "email": "admin@kulkat.hu"
         },
         "token": "1|abcd1234...",
         "token_type": "Bearer"
